@@ -20,14 +20,20 @@ exports.handler = (event, context) => {
       case "IntentRequest":
         // Intent Request
         console.log(`INTENT REQUEST`)
-        context.succeed(
-          generateResponse(
-          buildSpeechletResponse("Pythagoras Intent reached", true),
-          {}
-
-          )
-        )
-        break;
+        console.log(event.request.intent.name)
+        switch(event.request.intent.name) {
+          case "GetHypot":
+            console.log(event.request.intent.name)
+            console.log(event.request.intent.slots.oppval.value)
+            console.log(event.request.intent.slots.adjval.value)
+            context.succeed(
+              generateResponse(
+                buildSpeechletResponse("Pythagoras Intent reached", true),
+                {}
+              )
+            )
+            break;
+        }
 
       case "SessionEndedRequest":
         // Session Ended Request
@@ -37,27 +43,28 @@ exports.handler = (event, context) => {
       default:
         context.fail(`INVALID REQUEST TYPE: ${event.request.type}`)
     }
-}
+
 
 // Helpers
-buildSpeechletResponse = (outputText, shouldEndSession) => {
+    buildSpeechletResponse = (outputText, shouldEndSession) => {
 
-  return {
-    outputSpeech: {
-      type: "PlainText",
-      text: outputText
-    },
-    shouldEndSession: shouldEndSession
-  }
+        return {
+            outputSpeech: {
+                type: "PlainText",
+                text: outputText
+                },
+            shouldEndSession: shouldEndSession
+            }
 
-}
+        }
 
-generateResponse = (speechletResponse, sessionAttributes) => {
+    generateResponse = (speechletResponse, sessionAttributes) => {
 
-  return {
-    version: "1.0",
-    sessionAttributes: sessionAttributes,
-    response: speechletResponse
-  }
+        return {
+            version: "1.0",
+            sessionAttributes: sessionAttributes,
+            response: speechletResponse
+            }
 
-}
+        }
+    }
