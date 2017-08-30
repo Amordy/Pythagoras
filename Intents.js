@@ -1,20 +1,11 @@
 {
   "intents": [
     {
-      "intent": "GetOpposite",
+      "intent": "GetHypot",
       "slots": [
         {
-          "name": "oppval",
-          "type": "amazon.number"
-        }
-      ]
-    },
-    {
-      "intent": "GetAdjacent",
-      "slots": [
-        {
-          "name": "adjval",
-          "type": "amazon.number"
+          "name": "opval",
+          "type": "AMAZON.NUMBER"
         }
       ]
     }
